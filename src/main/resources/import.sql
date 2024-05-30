@@ -1,0 +1,1 @@
+INSERT INTO mascota (nombre,fecha_nac, raza, peso, tiene_chip, url_foto) VALUES ('Darko','2024-05-07', 'Pastor Aleman', 20 , true, 'https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg' );
