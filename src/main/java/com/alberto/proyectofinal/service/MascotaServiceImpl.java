@@ -1,8 +1,11 @@
 package com.alberto.proyectofinal.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,14 +28,14 @@ public class MascotaServiceImpl implements MascotaService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Mascota buscarPorId(Long id) {	
-		return repository.findById(id).orElse(null);
+	public Optional<Mascota> buscarPorId(Long id) {	
+		return repository.findById(id);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Mascota buscarPorNombre(String nombre) {	
-		return repository.findByNombre(nombre).orElse(null);
+	public Optional<Mascota> buscarPorNombre(String nombre) {	
+		return repository.findByNombre(nombre);
 	}
 
 	@Override
@@ -48,5 +51,11 @@ public class MascotaServiceImpl implements MascotaService {
 		
 		return mascotaBorrada;
 	}
+	
+	@Override
+    @Transactional(readOnly = true)
+    public Page<Mascota> listadoDeMascotas(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
 
 }

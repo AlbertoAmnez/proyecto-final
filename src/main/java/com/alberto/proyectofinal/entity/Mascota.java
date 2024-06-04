@@ -1,6 +1,8 @@
 package com.alberto.proyectofinal.entity;
 
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +26,7 @@ public class Mascota {
 	private String nombre;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String fecha_nac;
+	private Date fechanac;
 	
 	private String raza;
 	
@@ -36,12 +38,12 @@ public class Mascota {
 	
 	
 
-	public Mascota(Long id, String nombre, String fecha_nac, String raza, int peso, boolean tiene_chip,
+	public Mascota(Long id, String nombre, Date fechanac, String raza, int peso, boolean tiene_chip,
 			String url_foto) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.fecha_nac = fecha_nac;
+		this.fechanac = fechanac;
 		this.raza = raza;
 		this.peso = peso;
 		this.tiene_chip = tiene_chip;
