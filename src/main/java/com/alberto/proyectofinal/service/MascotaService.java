@@ -16,7 +16,6 @@ public interface MascotaService {
 	
 	public Optional<Mascota> buscarPorId(Long id);
 	
-
 	public Mascota guardar (Mascota mascota);
 	
 	public Mascota borrar (Long id);

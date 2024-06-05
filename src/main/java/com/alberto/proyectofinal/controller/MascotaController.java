@@ -42,16 +42,27 @@ public class MascotaController {
 		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 	
-	@PostMapping(path="/mascota", consumes="application/json")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Mascota subirMascota(@RequestBody Mascota mascota) {
-		return service.guardar(mascota);
+	@GetMapping("/mascota/nombre/{nombre}")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<Mascota>  mascotaByNombre(@PathVariable("nombre") String nombre) {
+		Optional<Mascota> optMascota = service.buscarPorNombre(nombre);
+		if(optMascota.isPresent()) {
+			return new ResponseEntity<>(optMascota.get(), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 	
 	@GetMapping("/mascota")
 	public Iterable<Mascota> listadoDeMascotas() {
 		return service.listadoDeMascotas();
 	}
+	
+	@PostMapping(path="/mascota", consumes="application/json")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Mascota subirMascota(@RequestBody Mascota mascota) {
+		return service.guardar(mascota);
+	}
+	
 	
 	@GetMapping("/mascota/jovenes/20")
 	public List<Mascota> mascotasMasJovenes() {
@@ -70,13 +81,5 @@ public class MascotaController {
 	public void borrarMascota(@PathVariable("id") Long id) {
 		service.borrar(id);
 	}
-	@GetMapping("/mascota/nombre/{nombre}")
-	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Mascota>  mascotaByNombre(@PathVariable("nombre") String nombre) {
-		Optional<Mascota> optMascota = service.buscarPorNombre(nombre);
-		if(optMascota.isPresent()) {
-			return new ResponseEntity<>(optMascota.get(), HttpStatus.OK);
-		}
-		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-	}
+	
 }
